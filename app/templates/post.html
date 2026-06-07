@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} - 个人博客{% endblock %}
+
+{% block body_class %}page-post{% endblock %}
+
+{% block container_class %}container-article{% endblock %}
+
+{% block content %}
+<button type="button" class="post-back-btn" id="post-back" aria-label="返回上一页">
+    <svg class="post-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    返回
+</button>
+
+<article class="article">
+    <header class="article-header">
+        <h1 class="article-title">{{ post.title }}</h1>
+        <p class="article-excerpt">{{ post.excerpt }}</p>
+        <div class="article-meta">
+            <time datetime="{{ post.date }}">{{ post.date }}</time>
+            <span class="meta-sep">·</span>
+            <span class="article-author">Scattwind</span>
+            <span class="meta-sep">·</span>
+            <span class="article-tags">
+                {% for tag in post.tags %}
+                <span class="article-tag">{{ tag }}</span>
+                {% endfor %}
+            </span>
+            <span class="meta-sep">·</span>
+            <span class="article-reading-time">预计阅读 {{ post.reading_minutes }} 分钟</span>
+        </div>
+    </header>
+
+    <div class="article-body">
+        {{ post.content | safe }}
+    </div>
+
+    <footer class="article-footer">
+        <div class="article-nav">
+            {% if prev_post %}
+            <a href="{{ url_for('main.post', slug=prev_post.slug) }}" class="nav-card nav-card-prev">
+                <span class="nav-card-label">← 上一篇</span>
+                <span class="nav-card-title">{{ prev_post.title }}</span>
+            </a>
+            {% else %}
+            <div class="nav-card nav-card-empty"></div>
+            {% endif %}
+
+            {% if next_post %}
+            <a href="{{ url_for('main.post', slug=next_post.slug) }}" class="nav-card nav-card-next">
+                <span class="nav-card-label">下一篇 →</span>
+                <span class="nav-card-title">{{ next_post.title }}</span>
+            </a>
+            {% else %}
+            <div class="nav-card nav-card-empty"></div>
+            {% endif %}
+        </div>
+
+        <p class="article-feedback">
+            对本文有建议或想法？欢迎发邮件至
+            <a href="mailto:honglanh6765@gmail.com">honglanh6765@gmail.com</a>
+        </p>
+    </footer>
+</article>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/post.js') }}"></script>
+{% endblock %}

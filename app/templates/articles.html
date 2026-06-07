@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}文章 - 个人博客{% endblock %}
+
+{% block body_class %}page-articles{% endblock %}
+
+{% block container_class %}container-articles{% endblock %}
+
+{% block content %}
+<section class="articles-toolbar">
+    <div class="tag-pills" role="tablist" aria-label="文章分类">
+        <button type="button" class="tag-pill active" data-category="all" role="tab" aria-selected="true">全部</button>
+        {% for category in categories %}
+        <button type="button" class="tag-pill" data-category="{{ category }}" role="tab" aria-selected="false">{{ category }}</button>
+        {% endfor %}
+    </div>
+    <div class="articles-search">
+        <svg class="articles-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="M20 20l-4-4"/>
+        </svg>
+        <input
+            type="search"
+            class="articles-search-input"
+            id="articles-search"
+            placeholder="搜索关键词，如 Anaconda环境配置"
+            aria-label="搜索文章"
+            autocomplete="off"
+        >
+    </div>
+</section>
+
+<section class="articles-timeline" id="articles-list">
+    {% for post in posts %}
+    <article
+        class="article-item"
+        data-category="{{ post.category }}"
+        data-title="{{ post.title }}"
+        data-excerpt="{{ post.excerpt }}"
+        data-tags="{{ post.tags | join(' ') }}"
+    >
+        <a href="{{ url_for('main.post', slug=post.slug) }}" class="article-item-link">
+            <div class="article-item-card">
+                <div class="article-item-meta">
+                    <time datetime="{{ post.date }}">{{ post.date }}</time>
+                    <span class="article-item-category">{{ post.category }}</span>
+                </div>
+                <h2 class="article-item-title">{{ post.title }}</h2>
+                <p class="article-item-excerpt">{{ post.excerpt }}</p>
+            </div>
+        </a>
+    </article>
+    {% endfor %}
+</section>
+
+<p class="articles-empty" id="articles-empty" hidden>没有找到匹配的文章，试试其他关键词或分类。</p>
+
+<nav class="pagination" id="pagination" aria-label="文章分页"></nav>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/articles.js') }}"></script>
+{% endblock %}

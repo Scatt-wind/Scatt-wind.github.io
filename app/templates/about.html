@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}关于我 - 个人博客{% endblock %}
+
+{% block body_class %}page-about{% endblock %}
+
+{% block container_class %}container-wide{% endblock %}
+
+{% block content %}
+<section class="about-page">
+    <div class="about-layout">
+        <aside class="about-sidebar">
+            <div class="about-avatar-wrap">
+                <img
+                    src="{{ url_for('static', filename='images/avatar.png') }}"
+                    alt="SGH 头像"
+                    class="about-avatar"
+                    width="220"
+                    height="220"
+                >
+            </div>
+            <h1 class="about-name">SGH</h1>
+            <p class="about-tagline">用代码解决问题，用文字记录生活</p>
+        </aside>
+
+        <div class="about-main">
+            <section class="about-section">
+                <p class="about-intro">
+                    您好，我是 SGH，一个热衷于用代码解决实际问题，同时也喜欢记录生活的开发者。
+                </p>
+            </section>
+
+            <section class="about-section">
+                <h2 class="about-section-title">技术栈</h2>
+                <div class="about-radar-wrap">
+                    <canvas id="skillsRadar" aria-label="技能雷达图"></canvas>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <h2 class="about-section-title">正在做的事</h2>
+                <ul class="about-list">
+                    <li>正在学习 AI 大模型开发</li>
+                    <li>正在学习 AI 应用开发</li>
+                    <li>持续精进 Python 语言</li>
+                </ul>
+            </section>
+
+            <section class="about-section">
+                <h2 class="about-section-title">非技术爱好</h2>
+                <ul class="about-list about-hobbies">
+                    <li>
+                        <span class="hobby-icon" aria-hidden="true">🎮</span>
+                        各大竞技类网游（CS2 双平台 S 分段）
+                    </li>
+                    <li>
+                        <span class="hobby-icon" aria-hidden="true">🖌️</span>
+                        软笔书法（国家十级）
+                    </li>
+                    <li>
+                        <span class="hobby-icon" aria-hidden="true">🏀</span>
+                        打篮球
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <pre class="about-ascii" aria-label="彩蛋字符画"><code>
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║   如果你看到了这里，说明你是个有趣的人，欢迎给我发邮件！     ║
+║                                                              ║
+║   ✉  honglanh6765@gmail.com                                  ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+    </code></pre>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/about.js') }}"></script>
+{% endblock %}
