@@ -27,6 +27,10 @@ first_blog/
 │   │   ├── images/          # 站点级图片（头像、二维码等）
 │   │   └── js/
 │   └── templates/
+├── scripts/
+│   └── build_static.py      # GitHub Pages 静态构建
+├── .github/workflows/
+│   └── deploy-pages.yml     # 自动部署工作流
 ├── requirements.txt
 └── run.py
 ```
@@ -45,6 +49,35 @@ python run.py
 ```
 
 浏览器访问 `http://127.0.0.1:5000`。
+
+## GitHub Pages 部署
+
+线上地址：**https://scatt-wind.github.io/**
+
+GitHub Pages 只能托管静态文件，因此通过 `scripts/build_static.py` 将 Flask 路由预渲染为 HTML，再由 GitHub Actions 自动发布。
+
+### 首次配置（只需一次）
+
+1. 打开仓库 [Settings → Pages](https://github.com/Scatt-wind/Scatt-wind.github.io/settings/pages)
+2. **Build and deployment → Source** 选择 **GitHub Actions**（不要选 Deploy from a branch）
+
+### 发布流程
+
+```bash
+git push origin master
+```
+
+推送后 Actions 会自动执行：安装依赖 → 运行 `python scripts/build_static.py` → 部署 `dist/` 目录。
+
+### 本地预览构建结果
+
+```bash
+python scripts/build_static.py
+cd dist
+python -m http.server 8080
+```
+
+浏览器访问 `http://127.0.0.1:8080` 检查样式与链接是否正常。
 
 ## 发布新文章
 
@@ -85,6 +118,7 @@ slug: my-new-post   # 可选，默认使用文件名
 - ✅ 文章详情页：沉浸式阅读、代码复制、上下篇导航
 - ✅ 文章列表页（`/articles`）：分类胶囊筛选、关键词搜索、客户端分页
 - ✅ 关于我、友情链接页面
+- ✅ GitHub Pages 静态构建与 Actions 自动部署
 
 ### 核心约定
 
@@ -95,6 +129,7 @@ slug: my-new-post   # 可选，默认使用文件名
 
 ### 近期变更
 
+- 新增 `scripts/build_static.py` 与 GitHub Actions 工作流，支持 GitHub Pages 部署
 - 文章系统从 `posts.py` 硬编码迁移至 `content/` Markdown 文件
 - 新增 `content_loader.py` 扫描渲染与 `content_watcher.py` 开发热加载
 - 新增 `/content/<slug>/<path>` 路由，支持文章同目录图片引用
@@ -103,4 +138,3 @@ slug: my-new-post   # 可选，默认使用文件名
 ### 已知问题 / TODOs
 
 - 友情链接列表待扩充，目前已收录卡码笔记
-- 生产环境部署时需确认 `content/` 目录随应用一同发布
