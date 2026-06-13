@@ -10,6 +10,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    document.querySelectorAll(".article-body table").forEach(function (table) {
+        if (table.parentElement && table.parentElement.classList.contains("table-wrapper")) {
+            return;
+        }
+        var wrapper = document.createElement("div");
+        wrapper.className = "table-wrapper";
+        table.parentNode.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+    });
+
     document.querySelectorAll(".article-body pre").forEach(function (pre) {
         if (pre.querySelector(".code-copy-btn")) return;
 

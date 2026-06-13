@@ -498,6 +498,57 @@ a:hover {
     margin-bottom: 0;
 }
 
+.article-body .table-wrapper {
+    margin: 2em 0;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.article-body table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.article-body th,
+.article-body td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid rgba(139, 148, 158, 0.35);
+    text-align: left;
+    vertical-align: top;
+}
+
+.article-body th:last-child,
+.article-body td:last-child {
+    border-right: none;
+}
+
+.article-body tr:last-child th,
+.article-body tr:last-child td {
+    border-bottom: none;
+}
+
+.article-body th {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.article-body td {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    word-break: break-word;
+}
+
+.article-body tbody tr:hover td {
+    background-color: var(--bg-hover);
+}
+
 .article-body code {
     font-family: "Cascadia Code", "Fira Code", Consolas, "Courier New", monospace;
     font-size: 0.88em;
