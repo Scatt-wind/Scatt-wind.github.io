@@ -1,5 +1,5 @@
 ---
-title: 机器学习学习心得：从波士顿房价到鸢尾花分类
+title: PyTorch CIFAR-10 图像分类
 date: 2026-06-24
 excerpt: 从零搭建 CNN 实战
 tags: [Python, CNN, 深度学习, PyTorch]
