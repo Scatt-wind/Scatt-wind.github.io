@@ -7,6 +7,7 @@
 - **语言 / 框架：** Python 3、Flask
 - **模板：** Jinja2
 - **内容：** Markdown + YAML Front Matter（`python-frontmatter` + `markdown`）
+- **公式：** KaTeX（jsDelivr CDN，仅文章详情页客户端渲染）
 - **热加载：** 开发模式下 `watchdog` 监听 `content/` 目录变更
 - **前端：** 原生 HTML / CSS / JavaScript（无额外前端框架）
 
@@ -20,7 +21,7 @@ first_blog/
 │   ├── __init__.py          # 应用工厂
 │   ├── routes.py            # 路由
 │   ├── posts.py             # 文章访问接口
-│   ├── content_loader.py    # Markdown 扫描与渲染
+│   ├── content_loader.py    # Markdown 扫描、内链/图片重写、公式保护
 │   ├── content_watcher.py   # 开发模式热加载
 │   ├── static/
 │   │   ├── css/style.css
@@ -96,16 +97,29 @@ slug: my-new-post   # 可选，默认使用文件名
 正文支持 **Markdown** 语法。
 
 ![配图说明](./my-new-post/screenshot.png)
+
+[关联文章](另一篇文章.md)
+
+块级公式：
+
+$$
+y = \frac{x - \mu}{\sigma}
+$$
+
+行内公式：其中 $\mu$ 和 $\sigma$ 由训练集计算。
 ```
 
 3. 图片放在文章同目录或子文件夹，使用相对路径引用（见上文示例）
-4. 开发模式下保存文件后自动热加载，刷新页面即可看到更新
+4. 文章互链使用 `[标题](文件名.md)`，系统自动转为 `/post/<slug>`
+5. 开发模式下保存文件后自动热加载，刷新页面即可看到更新
 
 **分类目录：** `项目介绍` / `生活随笔` / `踩坑记录`
 
 **文章 URL：** `/post/<slug>`
 
 **图片 URL：** 自动映射为 `/content/<slug>/<相对路径>`
+
+**公式写法：** 块级 `$$...$$`，行内 `$...$`，内容为 LaTeX（如 `\frac{}{}`、`\text{}`）
 
 ## Agent 上下文 / 开发者备注
 
@@ -115,7 +129,8 @@ slug: my-new-post   # 可选，默认使用文件名
 - ✅ 开发热加载：`content/` 下 `.md` 与图片变更后自动重新加载
 - ✅ 文章图片：与 Markdown 同目录存放，详情页自适应展示
 - ✅ 首页：默认展示最近 3 篇文章，卡片整卡可点击进入详情
-- ✅ 文章详情页：沉浸式阅读、代码复制、上下篇导航
+- ✅ 文章详情页：沉浸式阅读、代码复制、上下篇导航、KaTeX 公式渲染
+- ✅ Markdown 内链：`[标题](xxx.md)` 自动改写为 `/post/<slug>`
 - ✅ 文章列表页（`/articles`）：分类胶囊筛选、关键词搜索、客户端分页
 - ✅ 关于我、友情链接页面
 - ✅ GitHub Pages 静态构建与 Actions 自动部署
@@ -126,14 +141,16 @@ slug: my-new-post   # 可选，默认使用文件名
 - 文章分类由 `content/` 下的子文件夹名决定，取值：`项目介绍`、`生活随笔`、`踩坑记录`
 - `slug` 默认等于文件名（不含 `.md`），Front Matter 可显式覆盖
 - 阅读时长 `reading_minutes` 可根据正文字数自动估算，也可在 Front Matter 中手动指定
+- 文章互链文件名须与 `content/` 实际文件名一致（注意空格）；`slug` 默认为文件名 stem
+- 公式在 Markdown 解析前占位保护，避免 `$$` 被剥离；渲染依赖 KaTeX CDN（静态站同样生效）
 
 ### 近期变更
 
+- 新增 Markdown 内链自动重写（`.md` → `/post/<slug>`）与 KaTeX 公式渲染
 - 新增 `scripts/build_static.py` 与 GitHub Actions 工作流，支持 GitHub Pages 部署
 - 文章系统从 `posts.py` 硬编码迁移至 `content/` Markdown 文件
 - 新增 `content_loader.py` 扫描渲染与 `content_watcher.py` 开发热加载
 - 新增 `/content/<slug>/<path>` 路由，支持文章同目录图片引用
-- 详情页新增 `.article-body img` 样式
 
 ### 已知问题 / TODOs
 

@@ -10,7 +10,7 @@
 | `__init__.py` | `create_app()` 工厂；debug 下注册 `content_watcher` |
 | `routes.py` | `main_bp` 蓝图，页面与内容资源路由 |
 | `posts.py` | 文章访问门面，委托 `PostStore` |
-| `content_loader.py` | 扫描 `content/`、解析 Front Matter、渲染 Markdown |
+| `content_loader.py` | 扫描 `content/`、解析 Front Matter、渲染 Markdown（含内链重写、公式保护） |
 | `content_watcher.py` | `watchdog` 监听内容变更并 debounce 重载 |
 
 ## 对外接口
@@ -35,6 +35,9 @@
 - `CATEGORIES` 与 `content/` 子目录名必须一致：`项目介绍`、`生活随笔`、`踩坑记录`
 - 文章 Front Matter 必填 `title`、`date`；缺一则跳过该文件
 - `PostStore` 为进程内单例；热重载调用 `reload()`，非 debug 需重启进程
+- Markdown 渲染流水线：`protect_math` → `rewrite_image_paths` → `rewrite_internal_links` → `markdown.markdown` → `restore_math`
+- 内链 `[文本](xxx.md)` 自动改写为 `/post/<slug>`（slug 取文件名 stem）
+- 公式 `$$...$$` / `$...$` 在 Markdown 解析前占位保护，解析后还原为 `\[...\]` / `\(...\)`，由 `post.html` 中 KaTeX auto-render 渲染
 - 新增页面路由时同步更新 `scripts/build_static.py`
 - `SECRET_KEY` 当前为开发占位值，生产静态站不依赖 session
 

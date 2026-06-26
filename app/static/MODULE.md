@@ -27,6 +27,7 @@
 - 无构建工具链，改 CSS/JS 后刷新或重新运行 `build_static.py` 即可
 - 新增页面脚本应在对应模板 `{% block scripts %}` 中引入，避免全局加载
 - 文章正文样式主要在 `.article-body` 选择器下扩展
+- `.katex-display` / `.katex` 控制公式块间距与横向滚动
 
 ## 子模块
 - `css/`、`js/`、`images/` — 按类型存放，无独立逻辑

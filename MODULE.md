@@ -29,7 +29,7 @@
 ## 模块索引
 | 路径 | 职责摘要 |
 |------|----------|
-| `app/` | Flask 应用工厂、路由、文章加载与热重载 |
+| `app/` | Flask 应用工厂、路由、Markdown 渲染（内链/公式/图片）与热重载 |
 | `app/templates/` | Jinja2 页面模板 |
 | `app/static/` | CSS、JS、站点图片 |
 | `content/` | Markdown 文章源文件与配图 |
