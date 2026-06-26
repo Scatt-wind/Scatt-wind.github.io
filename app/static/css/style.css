@@ -581,6 +581,16 @@ a:hover {
     white-space: pre;
 }
 
+.article-body .katex-display {
+    margin: 1.6em 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.article-body .katex {
+    font-size: 1.05em;
+}
+
 .code-copy-btn {
     position: absolute;
     top: 10px;

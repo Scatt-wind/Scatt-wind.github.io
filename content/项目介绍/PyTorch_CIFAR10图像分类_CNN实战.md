@@ -259,7 +259,7 @@ best_val_acc = 0
 
 ### 6.2 训练循环（五步模板）
 
-与 [线性回归博客](PyTorch线性回归入门.md) 和手机价格预测完全一致，只是模型换成了 CNN：
+与 [线性回归博客](PyTorch 线性回归入门.md) 和手机价格预测完全一致，只是模型换成了 CNN：
 
 ```python
 for epoch in range(epochs):

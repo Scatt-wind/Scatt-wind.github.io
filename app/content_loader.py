@@ -15,6 +15,62 @@ _MD_EXTENSIONS = [
 ]
 
 _IMAGE_PATTERN = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
+_LINK_PATTERN = re.compile(r"(?<!!)\[([^\]]*)\]\(([^)]+)\)")
+_MATH_BLOCK_PATTERN = re.compile(r"\$\$([\s\S]+?)\$\$")
+_MATH_INLINE_PATTERN = re.compile(r"(?<!\$)\$(?!\$)([^\$\n]+?)(?<!\$)\$(?!\$)")
+_MATH_NORMALIZE_PATTERN = re.compile(r"\\\(\s*\$\$(.+?)\$\$\s*\\\)")
+
+
+def _normalize_math_delimiters(md_text: str) -> str:
+    return _MATH_NORMALIZE_PATTERN.sub(r"\\(\1\\)", md_text)
+
+
+def _protect_math(md_text: str) -> tuple[str, dict[str, str]]:
+    placeholders: dict[str, str] = {}
+    counter = 0
+
+    def block_replacer(match: re.Match) -> str:
+        nonlocal counter
+        key = f"%%MATH_BLOCK_{counter}%%"
+        placeholders[key] = match.group(1).strip()
+        counter += 1
+        return key
+
+    def inline_replacer(match: re.Match) -> str:
+        nonlocal counter
+        key = f"%%MATH_INLINE_{counter}%%"
+        placeholders[key] = match.group(1).strip()
+        counter += 1
+        return key
+
+    text = _normalize_math_delimiters(md_text)
+    text = _MATH_BLOCK_PATTERN.sub(block_replacer, text)
+    text = _MATH_INLINE_PATTERN.sub(inline_replacer, text)
+    return text, placeholders
+
+
+def _restore_math(html: str, placeholders: dict[str, str]) -> str:
+    for key, latex in placeholders.items():
+        if key.startswith("%%MATH_BLOCK_"):
+            replacement = f"\\[{latex}\\]"
+        else:
+            replacement = f"\\({latex}\\)"
+        html = html.replace(key, replacement)
+    return html
+
+
+def _rewrite_internal_links(md_text: str) -> str:
+    def replacer(match: re.Match) -> str:
+        text = match.group(1)
+        path = match.group(2).strip()
+        if path.startswith(("http://", "https://", "/post/", "/")):
+            return match.group(0)
+        if path.endswith(".md"):
+            target_slug = Path(path).stem
+            return f"[{text}](/post/{target_slug})"
+        return match.group(0)
+
+    return _LINK_PATTERN.sub(replacer, md_text)
 
 
 def _rewrite_image_paths(md_text: str, slug: str) -> str:
@@ -71,8 +127,11 @@ def _load_post(md_path: Path, category: str) -> dict | None:
         return None
 
     slug = meta.get("slug") or md_path.stem
-    md_body = _rewrite_image_paths(body, slug)
+    md_body, math_placeholders = _protect_math(body)
+    md_body = _rewrite_image_paths(md_body, slug)
+    md_body = _rewrite_internal_links(md_body)
     html = markdown.markdown(md_body, extensions=_MD_EXTENSIONS)
+    html = _restore_math(html, math_placeholders)
 
     reading_minutes = meta.get("reading_minutes")
     if reading_minutes is None:
