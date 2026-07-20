@@ -1037,12 +1037,86 @@ a:hover {
     margin-bottom: 16px;
 }
 
-.about-radar-wrap {
+.about-skill-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.about-skill-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    width: 100%;
+    padding: 14px 16px;
     background-color: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    max-width: 420px;
+    border-radius: 8px;
+    border-left: 3px solid var(--border);
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.about-skill-tile:hover {
+    border-color: var(--accent);
+    background-color: var(--bg-hover);
+}
+
+.about-skill-tile.is-active {
+    border-color: var(--accent);
+    border-left-color: var(--accent);
+    background-color: var(--bg-hover);
+}
+
+.about-skill-tile-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.about-skill-tile-metric {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.about-skill-detail {
+    min-height: 72px;
+    padding: 16px 20px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: border-color 0.2s ease;
+}
+
+.about-skill-detail.is-open {
+    border-color: var(--accent);
+    border-left: 3px solid var(--accent);
+}
+
+.about-skill-detail-placeholder {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.about-skill-detail-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.about-skill-detail-desc {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
 }
 
 .about-list {
@@ -1187,8 +1261,8 @@ a:hover {
         width: 180px;
     }
 
-    .about-radar-wrap {
-        max-width: 100%;
+    .about-skill-grid {
+        grid-template-columns: 1fr;
     }
 
     .about-ascii code {

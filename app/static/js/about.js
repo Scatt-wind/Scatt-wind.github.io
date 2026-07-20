@@ -1,78 +1,84 @@
 (function () {
-    var canvas = document.getElementById("skillsRadar");
-    if (!canvas || typeof Chart === "undefined") {
+    var grid = document.querySelector(".about-skill-grid");
+    var detail = document.getElementById("about-skill-detail");
+    if (!grid || !detail) {
         return;
     }
 
-    var labels = [
-        "Python",
-        "MySQL",
-        "Linux",
-        "数据分析",
-        "大模型部署",
-        "低代码平台",
-        "提示词工程",
-    ];
+    var placeholder = detail.querySelector(".about-skill-detail-placeholder");
+    var body = detail.querySelector(".about-skill-detail-body");
+    var titleEl = detail.querySelector(".about-skill-detail-title");
+    var descEl = detail.querySelector(".about-skill-detail-desc");
+    var tiles = grid.querySelectorAll(".about-skill-tile");
+    var activeSkill = null;
 
-    var data = [8, 6, 5, 6, 5, 5, 6];
+    function clearActive() {
+        tiles.forEach(function (tile) {
+            tile.classList.remove("is-active");
+            tile.setAttribute("aria-expanded", "false");
+        });
+    }
 
-    var accent = getComputedStyle(document.documentElement)
-        .getPropertyValue("--accent")
-        .trim() || "#58a6ff";
+    function showPlaceholder() {
+        activeSkill = null;
+        clearActive();
+        if (placeholder) {
+            placeholder.hidden = false;
+        }
+        if (body) {
+            body.hidden = true;
+        }
+        detail.classList.remove("is-open");
+    }
 
-    new Chart(canvas, {
-        type: "radar",
-        data: {
-            labels: labels,
-            datasets: [{
-                label: "技能熟练度",
-                data: data,
-                backgroundColor: "rgba(88, 166, 255, 0.15)",
-                borderColor: accent,
-                borderWidth: 2,
-                pointBackgroundColor: accent,
-                pointBorderColor: "#0d1117",
-                pointHoverBackgroundColor: "#79b8ff",
-                pointRadius: 4,
-                pointHoverRadius: 6,
-            }],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            scales: {
-                r: {
-                    min: 0,
-                    max: 10,
-                    ticks: {
-                        stepSize: 2,
-                        color: "#6e7681",
-                        backdropColor: "transparent",
-                        font: { size: 11 },
-                    },
-                    grid: { color: "rgba(48, 54, 61, 0.8)" },
-                    angleLines: { color: "rgba(48, 54, 61, 0.6)" },
-                    pointLabels: {
-                        color: "#8b949e",
-                        font: { size: 12, weight: "500" },
-                    },
-                },
-            },
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    backgroundColor: "#1c2128",
-                    titleColor: "#e6edf3",
-                    bodyColor: "#8b949e",
-                    borderColor: "#30363d",
-                    borderWidth: 1,
-                    callbacks: {
-                        label: function (ctx) {
-                            return "熟练度: " + ctx.raw + " / 10";
-                        },
-                    },
-                },
-            },
-        },
+    function showSkill(skillId) {
+        var template = document.getElementById("skill-detail-" + skillId);
+        if (!template || !titleEl || !descEl || !body) {
+            return;
+        }
+
+        var titleNode = template.content.querySelector("[data-title]");
+        var descNode = template.content.querySelector("[data-desc]");
+        if (!titleNode || !descNode) {
+            return;
+        }
+
+        activeSkill = skillId;
+        clearActive();
+
+        tiles.forEach(function (tile) {
+            if (tile.getAttribute("data-skill") === skillId) {
+                tile.classList.add("is-active");
+                tile.setAttribute("aria-expanded", "true");
+            }
+        });
+
+        titleEl.textContent = titleNode.textContent.trim();
+        descEl.textContent = descNode.textContent.trim();
+
+        if (placeholder) {
+            placeholder.hidden = true;
+        }
+        body.hidden = false;
+        detail.classList.add("is-open");
+    }
+
+    grid.addEventListener("click", function (event) {
+        var tile = event.target.closest(".about-skill-tile");
+        if (!tile || !grid.contains(tile)) {
+            return;
+        }
+
+        var skillId = tile.getAttribute("data-skill");
+        if (!skillId) {
+            return;
+        }
+
+        if (activeSkill === skillId) {
+            showPlaceholder();
+            return;
+        }
+
+        showSkill(skillId);
     });
 })();

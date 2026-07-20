@@ -11,7 +11,7 @@
 | `index.html` | 首页，展示 `posts`（最近 3 篇） |
 | `articles.html` | 文章列表，嵌入 `data-*` 供 `articles.js` 筛选分页 |
 | `post.html` | 文章详情，`post` / `prev_post` / `next_post`；KaTeX CDN 公式渲染 |
-| `about.html` | 关于我，头像与技能雷达图 |
+| `about.html` | 关于我：简介、能力磁贴 + 详情展开、爱好、邮件彩蛋 |
 | `links.html` | 友情链接 |
 
 ## 对外接口
@@ -20,14 +20,15 @@
 
 ## 依赖关系
 - **上游**：`app/routes.py`
-- **下游**：`app/static/`（`url_for('static', ...)`）、KaTeX CDN（仅 `post.html`）、Chart.js CDN（仅 `about.html`）
+- **下游**：`app/static/`（`url_for('static', ...)`）、KaTeX CDN（仅 `post.html`）
 
 ## 修改时注意
 - 导航链接使用 `url_for('main.*')`；静态构建后路径为相对 HTML 文件结构
 - `articles.html` 列表项需保留 `data-category`、`data-title`、`data-excerpt`、`data-tags` 供 JS 使用
 - 页面专属脚本通过 `{% block scripts %}` 扩展 `base.html`
 - `post.html` 在 DOMContentLoaded 后调用 `renderMathInElement` 渲染 `.article-body` 内公式，依赖 jsDelivr KaTeX CDN
-- `about.html` 依赖 `static/images/avatar.png`；`base.html` 依赖 `static/images/wechat-qr.png`
+- `about.html` 依赖 `static/images/avatar.png` 与 `static/js/about.js`；能力详情文案写在 `#skill-detail-*` 的 `<template>` 中
+- `base.html` 依赖 `static/images/wechat-qr.png`
 
 ## 子模块
 无（叶子目录）

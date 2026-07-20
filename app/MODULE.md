@@ -18,7 +18,7 @@
 |------|----------|------|
 | `GET /` | `index` | 首页，最近 3 篇 |
 | `GET /articles` | `articles` | 文章列表（全量传给模板，前端筛选分页） |
-| `GET /about` | `about` | 关于我 |
+| `GET /about` | `about` | 关于我（磁贴 + 按需展开详情，内容在模板） |
 | `GET /links` | `links` | 友情链接 |
 | `GET /post/<slug>` | `post` | 文章详情，含上下篇 |
 | `GET /content/<slug>/<path:filename>` | `content_asset` | 文章同目录图片等资源 |

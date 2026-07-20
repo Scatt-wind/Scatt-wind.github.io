@@ -132,7 +132,8 @@ $$
 - ✅ 文章详情页：沉浸式阅读、代码复制、上下篇导航、KaTeX 公式渲染
 - ✅ Markdown 内链：`[标题](xxx.md)` 自动改写为 `/post/<slug>`
 - ✅ 文章列表页（`/articles`）：分类胶囊筛选、关键词搜索、客户端分页
-- ✅ 关于我、友情链接页面
+- ✅ 关于我（`/about`）：简介 + 能力磁贴（点击展开详情）+ 爱好与邮件彩蛋
+- ✅ 友情链接页面
 - ✅ GitHub Pages 静态构建与 Actions 自动部署
 
 ### 核心约定
@@ -143,9 +144,11 @@ $$
 - 阅读时长 `reading_minutes` 可根据正文字数自动估算，也可在 Front Matter 中手动指定
 - 文章互链文件名须与 `content/` 实际文件名一致（注意空格）；`slug` 默认为文件名 stem
 - 公式在 Markdown 解析前占位保护，避免 `$$` 被剥离；渲染依赖 KaTeX CDN（静态站同样生效）
+- 关于页技术栈为「磁贴扫一眼 + 点击展开详情」，默认不展开长文；文案在 `about.html` 的 `<template>` 中维护
 
 ### 近期变更
 
+- 重构「关于我」：去掉 Chart.js 雷达图与长文堆砌，改为能力磁贴 + 按需展开详情
 - 新增 Markdown 内链自动重写（`.md` → `/post/<slug>`）与 KaTeX 公式渲染
 - 新增 `scripts/build_static.py` 与 GitHub Actions 工作流，支持 GitHub Pages 部署
 - 文章系统从 `posts.py` 硬编码迁移至 `content/` Markdown 文件
