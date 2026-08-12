@@ -1,5 +1,8 @@
 dist/
-.superpowers/brainstorm/
+.superpowers/
+.cursor/skills/
+docs/superpowers/
+
 __pycache__/
 *.py[cod]
 *$py.class
