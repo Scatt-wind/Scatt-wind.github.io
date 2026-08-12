@@ -40,14 +40,12 @@
         data-tags="{{ post.tags | join(' ') }}"
     >
         <a href="{{ url_for('main.post', slug=post.slug) }}" class="article-item-link">
-            <div class="article-item-card">
-                <div class="article-item-meta">
-                    <time datetime="{{ post.date }}">{{ post.date }}</time>
-                    <span class="article-item-category">{{ post.category }}</span>
-                </div>
-                <h2 class="article-item-title">{{ post.title }}</h2>
-                <p class="article-item-excerpt">{{ post.excerpt }}</p>
+            <div class="article-item-meta">
+                <time datetime="{{ post.date }}">{{ post.date }}</time>
+                <span class="article-item-category">{{ post.category }}</span>
             </div>
+            <h2 class="article-item-title">{{ post.title }}</h2>
+            <p class="article-item-excerpt">{{ post.excerpt }}</p>
         </a>
     </article>
     {% endfor %}

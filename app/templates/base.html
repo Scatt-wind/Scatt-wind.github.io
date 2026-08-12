@@ -4,25 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}个人博客{% endblock %}</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.2.5/chinese-simplified-400.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/chinese-simplified-400.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.2.5/chinese-simplified-700.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="{% block body_class %}{% endblock %}">
+    <a class="skip-link" href="#main">跳到正文</a>
     <header class="site-header">
         <div class="container">
-            <a href="/" class="logo">SGH-BLOG</a>
+            <a href="/" class="logo">SGH</a>
             <nav class="nav">
                 <a href="{{ url_for('main.index') }}" class="nav-link{% if active_nav == 'home' %} active{% endif %}">主页</a>
-                <span class="nav-sep" aria-hidden="true">|</span>
+                <span class="nav-sep" aria-hidden="true">·</span>
                 <a href="{{ url_for('main.articles') }}" class="nav-link{% if active_nav == 'articles' %} active{% endif %}">文章</a>
-                <span class="nav-sep" aria-hidden="true">|</span>
+                <span class="nav-sep" aria-hidden="true">·</span>
                 <a href="{{ url_for('main.about') }}" class="nav-link{% if active_nav == 'about' %} active{% endif %}">关于我</a>
-                <span class="nav-sep" aria-hidden="true">|</span>
+                <span class="nav-sep" aria-hidden="true">·</span>
                 <a href="{{ url_for('main.links') }}" class="nav-link{% if active_nav == 'links' %} active{% endif %}">友情链接</a>
             </nav>
         </div>
     </header>
 
-    <main class="main-content">
+    <main id="main" class="main-content">
         <div class="container {% block container_class %}{% endblock %}">
             {% block content %}{% endblock %}
         </div>

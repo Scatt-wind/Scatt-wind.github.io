@@ -7,10 +7,10 @@
 ## 关键文件
 | 文件 | 说明 |
 |------|------|
-| `base.html` | 全局布局：导航、页脚、社交链接、`active_nav` 高亮 |
-| `index.html` | 首页，展示 `posts`（最近 3 篇） |
+| `base.html` | 全局布局：跳过链接、`SGH` 标识、中点导航、页脚，以及 jsDelivr 宋体 / 黑体 |
+| `index.html` | 首页：开场「夜读，再写一行。」与最近 3 篇文章的无摘要墨线目录 |
 | `articles.html` | 文章列表，嵌入 `data-*` 供 `articles.js` 筛选分页 |
-| `post.html` | 文章详情，`post` / `prev_post` / `next_post`；KaTeX CDN 公式渲染 |
+| `post.html` | 窄栏文章详情：标题下红线、上下篇文字链，以及 KaTeX CDN 公式渲染 |
 | `about.html` | 关于我：简介、能力磁贴 + 详情展开、爱好、邮件彩蛋 |
 | `links.html` | 友情链接 |
 

@@ -17,6 +17,7 @@
 <article class="article">
     <header class="article-header">
         <h1 class="article-title">{{ post.title }}</h1>
+        <div class="article-title-rule" aria-hidden="true"></div>
         <p class="article-excerpt">{{ post.excerpt }}</p>
         <div class="article-meta">
             <time datetime="{{ post.date }}">{{ post.date }}</time>
@@ -40,21 +41,21 @@
     <footer class="article-footer">
         <div class="article-nav">
             {% if prev_post %}
-            <a href="{{ url_for('main.post', slug=prev_post.slug) }}" class="nav-card nav-card-prev">
-                <span class="nav-card-label">← 上一篇</span>
-                <span class="nav-card-title">{{ prev_post.title }}</span>
+            <a href="{{ url_for('main.post', slug=prev_post.slug) }}" class="article-nav-link article-nav-link-prev">
+                <span class="article-nav-label">上一篇</span>
+                <span class="article-nav-title">{{ prev_post.title }}</span>
             </a>
             {% else %}
-            <div class="nav-card nav-card-empty"></div>
+            <div class="article-nav-empty"></div>
             {% endif %}
 
             {% if next_post %}
-            <a href="{{ url_for('main.post', slug=next_post.slug) }}" class="nav-card nav-card-next">
-                <span class="nav-card-label">下一篇 →</span>
-                <span class="nav-card-title">{{ next_post.title }}</span>
+            <a href="{{ url_for('main.post', slug=next_post.slug) }}" class="article-nav-link article-nav-link-next">
+                <span class="article-nav-label">下一篇</span>
+                <span class="article-nav-title">{{ next_post.title }}</span>
             </a>
             {% else %}
-            <div class="nav-card nav-card-empty"></div>
+            <div class="article-nav-empty"></div>
             {% endif %}
         </div>
 

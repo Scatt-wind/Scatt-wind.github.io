@@ -34,4 +34,5 @@
 | `app/static/` | CSS、JS、站点图片 |
 | `content/` | Markdown 文章源文件与配图 |
 | `scripts/` | GitHub Pages 静态预渲染构建 |
+| `tests/` | Flask 测试客户端页面文案校验 |
 | `.github/workflows/` | push 到 `master` 时自动部署 Pages |

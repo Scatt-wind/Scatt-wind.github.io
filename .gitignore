@@ -1,4 +1,5 @@
 dist/
+.superpowers/brainstorm/
 __pycache__/
 *.py[cod]
 *$py.class

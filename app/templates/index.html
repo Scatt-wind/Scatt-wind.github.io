@@ -1,54 +1,27 @@
 {% extends "base.html" %}
 
-
-
 {% block title %}主页 - 个人博客{% endblock %}
 
-
-
 {% block content %}
-
 <section class="hero">
-
-    <h1 class="hero-title">欢迎来到我的个人博客</h1>
-
-    <p class="hero-subtitle">记录技术、生活与思考</p>
-
+    <h1 class="hero-title">夜读，再写一行。</h1>
+    <p class="hero-subtitle">技术笔记 · 生活随笔</p>
 </section>
-
-
 
 <section class="posts">
-
     <h2 class="section-title">最新文章</h2>
-
-
-
-    {% for post in posts %}
-
-    <article class="post-card">
-
-        <a href="{{ url_for('main.post', slug=post.slug) }}" class="post-card-link">
-
-            <div class="post-meta">
-
-                <time datetime="{{ post.date }}">{{ post.date }}</time>
-
-                <span class="post-tag">{{ post.category }}</span>
-
-            </div>
-
-            <h3 class="post-title">{{ post.title }}</h3>
-
-            <p class="post-excerpt">{{ post.excerpt }}</p>
-
-        </a>
-
-    </article>
-
-    {% endfor %}
-
+    <div class="ink-list">
+        {% for post in posts %}
+        <article class="ink-item{% if loop.first %} ink-item--latest{% endif %}">
+            <a href="{{ url_for('main.post', slug=post.slug) }}" class="ink-item-link">
+                <div class="ink-item-meta">
+                    <time datetime="{{ post.date }}">{{ post.date }}</time>
+                    <span class="ink-item-category">{{ post.category }}</span>
+                </div>
+                <h3 class="ink-item-title">{{ post.title }}</h3>
+            </a>
+        </article>
+        {% endfor %}
+    </div>
 </section>
-
 {% endblock %}
-
