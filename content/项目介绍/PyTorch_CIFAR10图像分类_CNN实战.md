@@ -1,6 +1,6 @@
 ---
 title: PyTorch CIFAR-10 图像分类
-date: 2026-06-24
+date: 2026-06-29
 excerpt: 从零搭建 CNN 实战
 tags: [Python, CNN, 深度学习, PyTorch]
 ---

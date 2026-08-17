@@ -1,6 +1,6 @@
 ---
 title: 产线质检 RAG 实战：短问走 FAQ，拿不准就拒答
-date: 2026-08-17
+date: 2025-08-21
 excerpt: 内饰件知识库问答，FAQ 直出 + RAG 生成，120 道题从 75% 打到 88%
 tags: [Python, LangChain, BGE-M3, Milvus, BM25]
 ---

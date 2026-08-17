@@ -1,6 +1,6 @@
 ---
 title: NewsCompass 中文新闻文本分类
-date: 2026-07-15
+date: 2026-07-18
 excerpt: TF-IDF+RF / FastText / BERT 三条基线实战
 tags: [Python, NLP, 文本分类, BERT, FastText, scikit-learn]
 ---

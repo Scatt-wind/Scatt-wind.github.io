@@ -1,6 +1,6 @@
 ---
 title: 用 A2A 和 MCP 搭一个能演示的旅行助手
-date: 2026-08-12
+date: 2026-08-10
 excerpt: 智慧旅行是一个基于 A2A（Agent-to-Agent） 与 MCP（Model Context Protocol） 协议的多 Agent 协作的旅行助手系统，旨在解决旅行规划中的信息整合问题。
 tags: [Python, PyTorch, 深度学习]
 ---

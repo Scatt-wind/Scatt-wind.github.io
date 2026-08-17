@@ -1,6 +1,6 @@
 ---
 title: PyTorch 线性回归入门
-date: 2026-06-20
+date: 2026-05-11
 excerpt: 从零理解完整训练流程
 tags: [Python, PyTorch, 深度学习]
 ---

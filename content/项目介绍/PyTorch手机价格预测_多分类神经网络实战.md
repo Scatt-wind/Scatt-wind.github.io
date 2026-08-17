@@ -1,6 +1,6 @@
 ---
 title: PyTorch 手机价格预测
-date: 2026-06-23
+date: 2026-06-26
 excerpt: 多分类神经网络实战
 tags: [Python, 深度学习, PyTorch]
 ---

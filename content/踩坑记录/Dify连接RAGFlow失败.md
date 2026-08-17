@@ -1,6 +1,6 @@
 ---
 title: Dify连接RAGFlow失败
-date: 2026-06-08
+date: 2024-05-19
 excerpt: 版本不兼容导致连接失败, 即使连接成功也无法在Dify使用RAGFlow的知识库检索
 tags: [Dify, RAGFlow]
 ---

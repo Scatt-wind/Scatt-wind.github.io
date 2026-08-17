@@ -1,6 +1,6 @@
 ---
 title: Claude Code 大封号，我选择回归国产全家桶
-date: 2026-07-01
+date: 2026-07-03
 excerpt: 当“最强AI”变成监控木马，是时候停止精神内耗了
 tags: [生活随笔, AI编程, Claude Code, 国产AI]
 ---

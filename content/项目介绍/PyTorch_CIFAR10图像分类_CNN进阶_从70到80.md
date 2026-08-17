@@ -1,6 +1,6 @@
 ---
 title: PyTorch CIFAR-10 图像分类进阶
-date: 2026-06-26
+date: 2026-07-01
 excerpt: 从 70% 到 80% 的 CNN 优化实战
 tags: [Python, CNN, PyTorch, 深度学习]
 ---

@@ -1,6 +1,6 @@
 ---
 title: RAVDA-智能数据分析与可视化助手
-date: 2026-06-13
+date: 2024-09-22
 excerpt: 上传一份 Excel，用中文问一句「按地区统计销售额并画柱状图」——剩下的交给系统。
 tags: [Python, Dify, Pandas, Matplotlib]
 ---

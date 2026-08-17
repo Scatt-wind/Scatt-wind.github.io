@@ -1,6 +1,6 @@
 ---
 title: 破茧成蝶，终见星光
-date: 2026-06-21
+date: 2026-06-22
 excerpt: 写在 Falcons 科隆加冕之际
 tags: [随笔, CS2]
 ---

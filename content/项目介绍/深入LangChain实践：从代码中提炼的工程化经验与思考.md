@@ -1,6 +1,6 @@
 ---
 title: 深入 LangChain 实践：从代码中提炼的工程化经验与思考
-date: 2026-07-20
+date: 2026-07-29
 excerpt: 从基础 LLM 调用一路写到完整的 RAG 问答系统
 tags: [LangChain, Python, RAG]
 ---

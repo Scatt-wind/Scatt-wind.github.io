@@ -1,6 +1,6 @@
 ---
 title: PyTorch 安装踩坑记
-date: 2026-06-17
+date: 2026-04-09
 excerpt: WinError 1114 终极解决方案
 tags: [PyTorch, Anaconda]
 ---
